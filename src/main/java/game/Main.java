@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Main {
+
+    private static final int TOURNAMENT_ROUNDS = 5;
+
     public static void main(String[] args) {
         List<Strategy> strategies = Arrays.asList(
                 new AlwaysCooperate(),
@@ -14,8 +17,9 @@ public class Main {
                 new TitForTat(),
                 new Friedman(),
                 new TitForTwoTat(),
-                new WinStayLoseShift()
+                new WinStayLoseShift(),
+                new SneakyDefector()
         );
-        Tournament.runTournament(strategies);
+        Tournament.runTournament(strategies, TOURNAMENT_ROUNDS);
     }
 }

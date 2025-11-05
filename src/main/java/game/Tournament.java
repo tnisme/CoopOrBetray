@@ -6,12 +6,11 @@ public class Tournament {
 
     private static final int MIN_ROUNDS = 190;
     private static final int MAX_ROUNDS = 210;
-    private static final int REPETITIONS = 5;
 
-    public static void runTournament(List<Strategy> strategies) {
+    public static void runTournament(List<Strategy> strategies, int repetitions) {
         Map<Integer, Map<String, Double>> roundScores = new HashMap<>();
 
-        for (int rep = 1; rep <= REPETITIONS; rep++) {
+        for (int rep = 1; rep <= repetitions; rep++) {
             Map<String, Double> currentRoundScores = new HashMap<>();
             int rounds = MIN_ROUNDS + new Random().nextInt(MAX_ROUNDS - MIN_ROUNDS + 1);
             for (Strategy s1 : strategies) {
@@ -30,10 +29,10 @@ public class Tournament {
         Map<String, Double> finalAverages = new HashMap<>();
         for (Strategy s : strategies) {
             double total = 0;
-            for (int rep = 1; rep <= REPETITIONS; rep++) {
+            for (int rep = 1; rep <= repetitions; rep++) {
                 total += roundScores.get(rep).get(s.getName());
             }
-            finalAverages.put(s.getName(), total / REPETITIONS);
+            finalAverages.put(s.getName(), total / repetitions);
         }
         // Sort results
         List<Map.Entry<String, Double>> sortedResults = new ArrayList<>(finalAverages.entrySet());
@@ -43,7 +42,7 @@ public class Tournament {
         System.out.println("===== Tournament Results =====");
         System.out.printf("%-6s", "Rank");
         System.out.printf("%-22s", "| Name");
-        for (int i = 1; i <= REPETITIONS; i++) {
+        for (int i = 1; i <= repetitions; i++) {
             System.out.printf("| Round %-3d", i);
         }
         System.out.printf("| Average%n");
@@ -54,7 +53,7 @@ public class Tournament {
             String rankStr = (rank == 1) ? (rank + " \uD83D\uDC51") : String.valueOf(rank);
             System.out.printf("%-5s | %-20s", rankStr, name);
 
-            for (int rep = 1; rep <= REPETITIONS; rep++) {
+            for (int rep = 1; rep <= repetitions; rep++) {
                 double score = roundScores.get(rep).get(name);
                 System.out.printf("| %-9.2f", score);
             }
