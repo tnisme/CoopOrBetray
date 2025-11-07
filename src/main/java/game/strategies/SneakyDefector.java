@@ -1,12 +1,12 @@
 package game.strategies;
 
 import game.Move;
-import game.Strategy;
+import game.NPC;
 
 import java.util.List;
 import java.util.Random;
 
-public class SneakyDefector implements Strategy {
+public class SneakyDefector implements NPC {
 
     private Random random = new Random();
     private int cooperateStreak = 0;
@@ -26,5 +26,17 @@ public class SneakyDefector implements Strategy {
     @Override
     public String getName() {
         return "Sneaky Defector";
+    }
+
+    @Override
+    public String getStory() {
+        return "Tôi là một người chơi thông minh, luôn tìm kiếm lợi ích cá nhân. " +
+                "Tôi không theo đuổi lý tưởng hay trả thù - tôi chỉ quan tâm đến kết quả. " +
+                "Nếu chiến lược hiện tại không hiệu quả, tôi sẽ thay đổi nó. Không có chiến lược tồi, chỉ có chiến lược không phù hợp với tình huống.";
+    }
+
+    @Override
+    public String getPersonality() {
+        return "Thực dụng, linh hoạt, và kết quả là trên hết";
     }
 }
